@@ -10,7 +10,7 @@ image_name = "2.png"
 image_path = os.path.join(path, folder_name, image_name)
 
 # Specify the list of languages
-languages = ['English', 'French']  # Adjust the languages as needed
+languages = ['English', 'Spanish']  # Adjust the languages as needed
 
 # Open the image file
 with open(image_path, 'rb') as file:

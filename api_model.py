@@ -103,12 +103,17 @@ def perform_ocr():
     image_file = request.files['image']
     language_names = request.form.getlist('languages')
     
-    # Map the language names to their corresponding language codes
-    languages = [language_codes.get(lang) for lang in language_names]
-    
-    # Check if any language name is invalid
-    if None in languages:
-        return jsonify({'error': 'Invalid language'}), 400
+    # Check if the request specifies all languages
+    if 'all' in language_names:
+        # Use all available languages
+        languages = list(language_codes.values())
+    else:
+        # Map the language names to their corresponding language codes
+        languages = [language_codes.get(lang) for lang in language_names]
+        
+        # Check if any language name is invalid
+        if None in languages:
+            return jsonify({'error': 'Invalid language'}), 400
     
     temp_image_path = "temp_image.png"
     image_file.save(temp_image_path)
@@ -118,7 +123,7 @@ def perform_ocr():
     
     os.remove(temp_image_path)
     
-    ocr_results = [{'text': str(word)} for word in result]  # Convert non-serializable values to strings
+    ocr_results = [word[1] for word in result]  # Extract text from result
     
     return jsonify({'results': ocr_results}), 200
 
