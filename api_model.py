@@ -93,6 +93,7 @@ language_codes = {
 
 @app.route('/ocr', methods=['POST'])
 def perform_ocr():
+    # Check if image and languages are provided in the request
     if 'image' not in request.files:
         return jsonify({'error': 'No image provided'}), 400
     
@@ -100,25 +101,26 @@ def perform_ocr():
         return jsonify({'error': 'No languages provided'}), 400
     
     image_file = request.files['image']
-    languages = request.form.getlist('languages')
+    language_names = request.form.getlist('languages')
     
-    for lang in languages:
-        if lang not in language_codes:
-            return jsonify({'error': f'Invalid language: {lang}'}), 400
+    # Map the language names to their corresponding language codes
+    languages = [language_codes.get(lang) for lang in language_names]
+    
+    # Check if any language name is invalid
+    if None in languages:
+        return jsonify({'error': 'Invalid language'}), 400
     
     temp_image_path = "temp_image.png"
     image_file.save(temp_image_path)
     
-    reader = easyocr.Reader(languages, gpu=False)  
-    result = reader.readtext(temp_image_path, detail=0)
+    reader = easyocr.Reader(languages, gpu=False)  # Set the specified languages
+    result = reader.readtext(temp_image_path)
     
     os.remove(temp_image_path)
     
-    ocr_results = []
-    for (bbox, text, _) in result:
-        ocr_results.append({'text': text})
+    ocr_results = [{'text': str(word)} for word in result]  # Convert non-serializable values to strings
     
     return jsonify({'results': ocr_results}), 200
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port=5000)
