@@ -11,3 +11,7 @@ conda install pytorch::pytorch torchvision torchaudio -c pytorch
 5 - conda install -c conda-forge easyocr
 6 - conda install --channel conda-forge pillow=9.5.0
 7 - conda install flask 
+8 - conda install -c conda-forge opencv
+9 - run  api_model.py
+10 - run send_request.py
+if you have error in pillow or opencv please enter the commands that belongs to pillow or opencv
