@@ -1,0 +1,11 @@
+1 - install anaconda on your system
+2 - conda create -n ocr python=3.8
+3 - conda activate ocr
+4 - #according to your os please see this https://pytorch.org/get-started/locally/ and install pytorch 
+# windows and conda : 
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+# linux and conda : 
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+# Mac and conda : 
+conda install pytorch::pytorch torchvision torchaudio -c pytorch
+5 - conda install -c conda-forge easyocr
