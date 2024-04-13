@@ -15,3 +15,4 @@ conda install pytorch::pytorch torchvision torchaudio -c pytorch
 9 - run  api_model.py
 10 - run send_request.py
 if you have error in pillow or opencv please enter the commands that belongs to pillow or opencv
+11 - pip install googletrans==4.0.0-rc1
