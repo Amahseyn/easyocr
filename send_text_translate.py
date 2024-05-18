@@ -6,7 +6,7 @@ url = "http://127.0.0.1:5000/translate"
 # Define the request payload with text to translate and destination language
 payload = {
     "text": "Hello, how are you?",
-    "dest": "persian"
+    "dest": "spanish"
 }
 
 # Make the POST request

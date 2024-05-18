@@ -7,7 +7,7 @@ image_name = "2.png"
 image_path = os.path.join(path, folder_name, image_name)
 # image_path
 
-reader = easyocr.Reader(['en'], gpu=False)  # You can specify more languages if needed
+reader = easyocr.Reader(['en'], gpu=False)  
 result = reader.readtext(image_path, detect_languages=True)
     
 for (bbox, text, prob) in result:
