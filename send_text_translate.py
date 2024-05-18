@@ -1,11 +1,16 @@
 import requests
-import json
 
-url = 'http://localhost:5000/translate'
-data = {'text': 'Mikä on nimesi'}
-headers = {'Content-Type': 'application/json'}
+# Define the URL of the translation endpoint
+url = "http://127.0.0.1:5000/translate"
 
-response = requests.post(url, data=json.dumps(data), headers=headers)
+# Define the request payload with text to translate and destination language
+payload = {
+    "text": "Hello, how are you?",
+    "dest": "persian"
+}
 
-print(response.status_code)
+# Make the POST request
+response = requests.post(url, json=payload)
+
+# Print the response
 print(response.json())

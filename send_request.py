@@ -4,6 +4,22 @@ import os
 url = 'http://localhost:5000/ocr'  # Adjust the URL if your server is running on a different host or port
 
 # Specify the image file path
+import requests
+
+# Define the URL of the translation endpoint
+url = "http://127.0.0.1:5000/translate"
+
+# Define the request payload with text to translate and destination language
+payload = {
+    "text": "Hello, how are you?",
+    "dest": "persian"
+}
+
+# Make the POST request
+response = requests.post(url, json=payload)
+
+# Print the response
+print(response.json())
 path = os.getcwd()
 folder_name = "test_image"
 image_name = "2.png"
